@@ -1,0 +1,100 @@
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-6 fade-in">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white relative inline-block">
+        Berita Terbaru
+        <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1.5 bg-green-500 rounded-full"></span>
+      </h2>
+      <p class="text-gray-400 mt-4 text-sm md:text-base">Informasi terkini seputar kegiatan dan pencapaian HMTE.</p>
+    </div>
+
+    <div id="latest-news-container" class="flex flex-wrap gap-8 justify-center">
+      <p class="text-gray-500 animate-pulse">Memuat berita...</p>
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="/page/news/news.html" class="inline-block px-8 py-3 bg-gray-800 text-white font-semibold rounded-full border border-gray-600 hover:bg-green-600 hover:border-green-500 hover:text-white transition-all duration-300 shadow-lg">
+        Lihat Semua Berita <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="/js/data/news.js"></script>
+
+<script>
+  // Fungsi format tanggal
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("id-ID", options);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const newsContainer = document.getElementById("latest-news-container");
+
+    // Cek ketersediaan data
+    if (typeof newsData === "undefined" || !Array.isArray(newsData) || newsData.length === 0) {
+      newsContainer.innerHTML = '<p class="text-gray-400 text-center italic">Belum ada berita terbaru.</p>';
+      return;
+    }
+
+    // SORTING: Terbaru ke Terlama
+    const sortedNews = newsData.slice().sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    // AMBIL 3 TERATAS
+    const latestNews = sortedNews.slice(0, 3);
+
+    let newsCardsHTML = "";
+
+    latestNews.forEach((news) => {
+      // FIX: Jalur Absolut untuk link detail
+      const detailLink = `/page/news/news-detail.html?id=${news.id}`;
+      // FIX: Jalur Absolut untuk gambar (jika belum ada slash di depan)
+      const imgSrc = news.imgSrc.startsWith("http") || news.imgSrc.startsWith("/") ? news.imgSrc : `/${news.imgSrc}`;
+
+      const newsCard = `
+                <div
+                    class="group flex flex-col bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 transition-all duration-300 hover:border-green-500 hover:shadow-xl hover:shadow-green-900/20 cursor-pointer w-full max-w-sm"
+                    onclick="window.location.href='${detailLink}'"
+                >
+                    <div class="overflow-hidden h-52 w-full relative">
+                        <img 
+                            src="${imgSrc}" 
+                            alt="${news.title}" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                            onerror="this.onerror=null;this.src='/img/logohmte.png';"
+                        />
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-900">
+                            ${news.category}
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-1">
+                        <p class="text-xs font-medium text-gray-500 mb-2 flex items-center">
+                            <i class="far fa-calendar-alt mr-2"></i> ${formatDate(news.date)}
+                        </p>
+                        
+                        <h3 class="font-bold text-white text-xl mb-3 leading-snug group-hover:text-green-400 transition-colors line-clamp-2">
+                            ${news.title}
+                        </h3>
+                        
+                        <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4">
+                            ${news.preview}
+                        </p>
+                        
+                        <div class="mt-auto pt-4 border-t border-gray-800">
+                             <span class="text-sm text-green-500 font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                                Baca Selengkapnya <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                             </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+      newsCardsHTML += newsCard;
+    });
+
+    newsContainer.innerHTML = newsCardsHTML;
+  });
+</script>

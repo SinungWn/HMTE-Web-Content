@@ -1,0 +1,59 @@
+<!-- TIMELINE KEGIATAN -->
+<section class="py-16 fade-in">
+  <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white relative inline-block">
+        Timeline Kegiatan
+        <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-20 h-1.5 bg-green-500 rounded-full"></span>
+      </h2>
+      <p class="text-gray-400 mt-4 text-sm md:text-base">Jadwal kegiatan dan program kerja terdekat.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Calendar Container -->
+      <div class="lg:col-span-2 bg-gray-800 rounded-lg p-4 sm:p-6">
+        <!-- Month/Year Navigation -->
+        <div class="flex items-center justify-between mb-6 gap-2">
+          <button onclick="changeMonth(-1)" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm font-semibold">← Prev</button>
+          <h3 id="month-year-display" class="text-xl sm:text-2xl font-bold text-white text-center flex-1">November 2025</h3>
+          <button onclick="changeMonth(1)" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm font-semibold">Next →</button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="bg-gray-900 rounded-lg p-3 sm:p-4">
+          <!-- Day headers -->
+          <div class="grid grid-cols-7 gap-1 sm:gap-2 mb-4">
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Min</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Sen</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Sel</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Rab</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Kam</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Jum</div>
+            <div class="text-center text-cyan-400 font-semibold text-xs sm:text-sm">Sab</div>
+          </div>
+
+          <!-- Calendar dates - akan di-render oleh JavaScript -->
+          <div id="calendar-grid" class="grid grid-cols-7 gap-1 sm:gap-2">
+            <!-- Dates will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Event Details -->
+        <div id="event-details" class="mt-4 sm:mt-6">
+          <div class="bg-gray-900 rounded-lg p-4 text-center text-gray-400 text-sm">Klik tanggal untuk melihat detail kegiatan</div>
+        </div>
+      </div>
+
+      <!-- Upcoming Events Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-gray-800 rounded-lg p-4 sm:p-6 sticky top-24">
+          <h3 class="text-white font-bold text-lg mb-4">Kegiatan Mendatang</h3>
+          <div id="upcoming-events" class="space-y-3">
+            <!-- Upcoming events will be rendered here -->
+            <p class="text-gray-400 text-sm">Memuat kegiatan...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

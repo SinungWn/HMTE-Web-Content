@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Halaman Berita</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/satoshi.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main>
+      <section class="py-16 fade-in">
+        <div class="mx-auto px-6 max-w-7xl">
+          <h1 class="text-5xl md:text-6xl font-bold gradient-text text-center mb-4">Berita</h1>
+          <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto text-center mb-10">Informasi, liputan event, dan pengumuman resmi HMTE.</p>
+
+          <div id="all-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
+
+          <div id="news-pagination-container" class="mt-10 flex justify-center space-x-2"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../js/loader.js"></script>
+    <script src="../../js/data/news.js"></script>
+    <script src="../../js/data/calendar.js"></script>
+    <script src="../../js/data/news-generator.js"></script>
+  </body>
+</html>
